@@ -1,0 +1,21 @@
+uci set wireless.default_radio0=wifi-iface
+uci set wireless.default_radio0.network=lan
+uci set wireless.default_radio0.mode=ap
+uci set wireless.default_radio0.device=radio0
+uci set wireless.default_radio0.encryption=psk2
+uci set wireless.default_radio0.ssid=luki
+uci set wireless.default_radio0.key='changeme'
+uci set wireless.radio0.disabled=0
+wifi
+
+# Set root password
+sed -i 's|^root::|root:$1$KwdmgG6E$lb80UmygGJKWEoQ3sDwCV0:|' /etc/shadow
+
+# Add Keys
+cat > /etc/dropbear/authorized_keys << \EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPN4jB6ef/dOjHeQRmgiRcNatH8rtgJEhomx/jzx0gMCZmOH1jz/VaHmGCRAXTbxG6gijjbJeBUlV5dQyzbe57562xUUNhyt81eUb+DYUmVJzrt+XKB53wi7FxKUU0y2HrSMdtp50+eLjbjG+D4Tb1BF/nTOrw1uS26UoF/ssLsoa1gk9DUfLX2aendK65Mey9q9VzFLbZCODKfmCHD0JWJBccsxup1hFlpon0FOk5UjA+ekG1AzDChozouGfn4X+EbasVFFLmN+gcLS/ey+nAA5+cxhwbaFsOUgq2VrE9iHnIv8OGP6Qm7gV/AeaCQJEElsx+zKwbgdqQGM6AkBFn
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyGYADQdDxJcr+Dmq9qU7uYgqWFdeliJS30vE5/8Hh4Bc1X7dEnzkEG6ZAKwKoRcQAuOKnYWCvez+8pPvkh5Q/QQVqbu1k76hUx+czYEDymzzZQ6ypaow/O+QzmOvJmmKvv7vrmySXWGaA6Y2jzwwwI0YwXF1A9fA90p7NXu1qKKnieeeiieCj9j33OealtkcdVspFSxOpDUf7bS4cBaAj94JqYJ+DCqg3RHKA34C+W0nrkEndJkOGJ0EScia/mHKOKWsM3QQ1iy8L2YFmU8/B/FB/SZylkrXkV/HMd/8sExEvkJ8mKu4kqy/QiPopszuN9UCcALLVzNu3DqlkyHXZ
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7ezEBSvxHq1ALcTQXZK1Ho5JzG/D9Ka5UJKA0pys9OylNTK/WNoKAS/THxeR7ylOMk9mj9fqSlHV/t5TSdlnJK2qc8f1VMKN0Vcb9i/OHk7QzKPGPu2kA7YSURfz9uxCHRGDKBLtsDofcDvGPOPL1Vv/7aVZ+lARsqGcMS2WuP5BqyHLukbHSSVrsz2F40guPit4Yq8xj3wiX9Hnz369mwbfSxu/cqzw/4F6IuU1waO4a125Vhcle6L8N50dXEbn949gjZPZFttZIJ3+8l7z/5xG5sED7gB+XM6LtOX+aG6jmdW3vDyyZ5acQhfa2wcoSHzfm14MvGhiewTJpN91z
+EOF
+
+sync
